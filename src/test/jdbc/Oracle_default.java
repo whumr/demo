@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 
 public class Oracle_default {
 
-	static final String constr = "jdbc:oracle:thin:@10.20.149.18:1521:emdb";
-	static final String username = "wardon";
-	static final String password = "wardon";
+	static final String constr = "jdbc:oracle:thin:@10.20.149.18:1521:xx";
+	static final String username = "xx";
+	static final String password = "xx";
 	
 	public static void main(String[] args) throws Exception {
 		String sql = "select b,a from test";

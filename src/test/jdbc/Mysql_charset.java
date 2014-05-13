@@ -7,11 +7,9 @@ import java.sql.ResultSet;
 
 public class Mysql_charset {
 
-//	static final String constr = "jdbc:mysql://10.20.36.20:3308/idb_test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true&max_allowed_packet=10485760";
-//	static final String constr = "jdbc:mysql://10.20.149.16:3306/intl_wl?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&connectTimeout=5000";
-	static final String constr = "jdbc:mysql://10.20.149.16:3306/intl_wl?useUnicode=true&characterEncoding=utf8";
-	static final String username = "idb_rnd";
-	static final String password = "K6F8iV7BoFXV49D7B8Zz";
+	static final String constr = "jdbc:mysql://10.20.149.16:3306/dd?useUnicode=true&characterEncoding=utf8";
+	static final String username = "";
+	static final String password = "";
 	
 	 
 //	static final String constr = "jdbc:mysql://localhost:3306/test";

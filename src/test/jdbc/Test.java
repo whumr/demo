@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 
 public class Test {
 
-	static final String constr = "jdbc:mysql://10.20.36.20:3306/idb_test";
-	static final String username = "idb";
-	static final String password = "idb";
+	static final String constr = "jdbc:mysql://10.20.36.20:3306/xx";
+	static final String username = "xx";
+	static final String password = "xx";
 	
-	static final String o_constr = "jdbc:oracle:thin:@10.20.149.18:1521:emdb";
-	static final String o_username = "idb";
-	static final String o_password = "idb";
+	static final String o_constr = "jdbc:oracle:thin:@10.20.149.18:1521:xx";
+	static final String o_username = "xx";
+	static final String o_password = "xx";
 	
 	
 	public static void main(String[] args) throws Exception {

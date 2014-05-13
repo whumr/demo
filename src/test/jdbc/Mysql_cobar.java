@@ -10,9 +10,9 @@ public class Mysql_cobar {
 //	static final String constr = "jdbc:mysql://10.20.149.14:3306/workoperations";
 //	static final String username = "cluster_mgm";
 //	static final String password = "cluster_mgm_pass";
-	static final String constr = "jdbc:mysql://10.20.156.155:8066/quake_cobar_dev";
-	static final String username = "quake_cobar_dev";
-	static final String password = "quake";
+	static final String constr = "jdbc:mysql://10.20.156.155:8066/xx";
+	static final String username = "xx";
+	static final String password = "xx";
 	
 	public static void main(String[] args) throws Exception {
 		String sql = "show tables";

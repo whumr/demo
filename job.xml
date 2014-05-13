@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job-scheduling-data xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"  
+    version="1.8">  
+      
+    <pre-processing-commands>  
+        <delete-jobs-in-group>*</delete-jobs-in-group>  <!-- clear all jobs in scheduler -->  
+        <delete-triggers-in-group>*</delete-triggers-in-group> <!-- clear all triggers in scheduler -->  
+    </pre-processing-commands>  
+      
+    <processing-directives>  
+        <overwrite-existing-data>true</overwrite-existing-data>  
+        <ignore-duplicates>false</ignore-duplicates>   
+    </processing-directives>  
+      
+    <schedule>  
+        <job>  
+            <name>FooJob</name>  
+            <group>FooBatch</group>  
+            <description>定时运行Job</description>  
+            <job-class>test.quartz.TestJob</job-class>  
+            <volatility>false</volatility>  
+            <durability>true</durability>  
+            <recover>false</recover>  
+        </job>  
+        <trigger>  
+            <cron>  
+                <name>FooTrigger</name>  
+                <group>FooBatch</group>  
+                <job-name>FooJob</job-name>  
+                <job-group>FooBatch</job-group>  
+                <misfire-instruction>MISFIRE_INSTRUCTION_FIRE_ONCE_NOW</misfire-instruction>  
+                <cron-expression>30/15 * 13 * * ?</cron-expression>  
+                <!-- 秒 分 时 日 月 星期 年 -->  
+            </cron>  
+        </trigger>  
+        <job>  
+            <name>onceJob</name>  
+            <group>FooBatch</group>  
+            <description>无trigger的Job</description>  
+            <job-class>test.quartz.TestJob</job-class>  
+            <volatility>false</volatility>  
+            <durability>true</durability>  
+            <recover>false</recover>  
+        </job>  
+    </schedule>      
+</job-scheduling-data>

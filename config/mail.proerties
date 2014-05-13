@@ -1,0 +1,4 @@
+mail.host=smtp.qq.com
+mail.from.email.username=@qq.com
+mail.from.email.password=
+mail.datamodify.application.subject=

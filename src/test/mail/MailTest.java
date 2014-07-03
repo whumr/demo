@@ -24,53 +24,48 @@ public class MailTest {
 	}
 
 	private String host = "smtp.qq.com";
+	private String username = "2979559743";
+	private String password = "fuck_qq";
+	private String mail_to = "2313797419@qq.com";
+	private String mail_from = "2979559743@qq.com";
+	private String mail_subject = "sss";
+	private String mail_body = "ddddddddddwew";
 
-	private String username = "@qq.com";
+	private String personalName = "ssss";
 
-	private String password = "";
-
-	private String mail_to = "@qq.com";
-
-	private String mail_from = username;
-
-	private String mail_subject = "";
-
-	private String mail_body = "����--�̲Ķ�����Ϣ����";
-
-	private String personalName = "�°���";
-
-	/**
-	 * �˶δ�����4������ͨ�����ʼ�
-	 */
 	public void send() {
 		try {
-			Properties props = new Properties(); // ��ȡϵͳ����
+			Properties props = new Properties();
 			props.put("mail.smtp.host", host);
-			props.put("mail.smtp.auth", "true");
-
+			props.put("mail.smtp.port", 25);
+			props.put("mail.smtp.socketFactory.port", 465);
+			props.put("mail.smtp.auth", true);
+			props.put("mail.smtp.socketFactory.fallback", false);
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			
+			
 			Session session = Session.getDefaultInstance(props,
 					new Authenticator() {
 						protected PasswordAuthentication getPasswordAuthentication() {
-							return new PasswordAuthentication(username,
-									password);
+							return new PasswordAuthentication(username, password);
 						}
 					});
-			// ����session,���ʼ����������ͨѶ��
+			session.setDebug(true);
 			MimeMessage message = new MimeMessage(session);
-			message.setContent("Hello", "text/plain"); // �����ʼ���ʽ
-			message.setSubject(mail_subject); // �����ʼ�����
-			message.setText(mail_body); // �����ʼ�����
-			message.setSentDate(new Date()); // �����ʼ���������
+			message.setContent("Hello", "text/plain");
+			message.setSubject(mail_subject);
+			message.setText(mail_body);
+			message.setSentDate(new Date()); 
 
 			Address address = new InternetAddress(mail_from, personalName);
-			message.setFrom(address); // �����ʼ������ߵĵ�ַ
-			Address toAddress = new InternetAddress(mail_to); // �����ʼ����շ��ĵ�ַ
+			message.setFrom(address);
+			Address toAddress = new InternetAddress(mail_to);
 			message.addRecipient(Message.RecipientType.TO, toAddress);
-			message.addRecipient(Message.RecipientType.CC, new InternetAddress(""));
+//			message.addRecipient(Message.RecipientType.CC, new InternetAddress("dddd"));
 			
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, username, password);
-			Transport.send(message); // �����ʼ�
+			Transport.send(message);
 
 			System.out.println("send ok!");
 

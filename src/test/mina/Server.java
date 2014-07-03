@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.util.concurrent.Executors;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
+import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFactory;
@@ -17,6 +19,7 @@ import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 import org.apache.mina.filter.codec.ProtocolEncoder;
 import org.apache.mina.filter.codec.ProtocolEncoderAdapter;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
+import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 public class Server {
@@ -29,6 +32,7 @@ public class Server {
 
 
         chain.addLast("codec", new ProtocolCodecFilter(new CodecFactory()));
+        chain.addLast("threadPool", new ExecutorFilter(Executors.newCachedThreadPool())); 
 
         // Bind
         acceptor.setHandler(new Handler());
@@ -41,17 +45,36 @@ public class Server {
 class Handler extends IoHandlerAdapter {
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
-		System.out.println("messageReceived : " + message.toString());
-		session.write(message);
+		try {
+			
+			System.out.println("messageReceived : " + message.toString());
+			WriteFuture wf = session.write(message);
+			long l = System.currentTimeMillis();
+			wf.awaitUninterruptibly();
+			System.out.println(wf.isWritten() + "\t" + (System.currentTimeMillis() - l));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
     public void exceptionCaught(IoSession session, Throwable e) {
+		System.out.println("exceptionCaught : " + e.getMessage());
         if (e instanceof IOException)
         	session.close(true);
         else
         	e.printStackTrace();
     }
+	
+	@Override
+	public void sessionClosed(IoSession session) throws Exception {
+		System.out.println("sessionClosed : " + (session == null ? "null" : session.getRemoteAddress()));
+	}
+	
+	@Override
+	public void messageSent(IoSession session, Object message) throws Exception {
+		System.out.println("messageSent : " + message + "\t" + session.isConnected() + "\t" + session.isClosing());
+	}
 }
 
 class CodecFactory implements ProtocolCodecFactory {
@@ -95,7 +118,6 @@ class CodecFactory implements ProtocolCodecFactory {
 				buf.putString(s, ce);
 				buf.flip();
 				out.write(buf);
-				System.out.println("send : " + s);
 			}
 		}
 	}

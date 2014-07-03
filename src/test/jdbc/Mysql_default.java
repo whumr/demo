@@ -8,8 +8,8 @@ public class Mysql_default {
 
 //	static final String constr = "jdbc:mysql://10.20.36.20:3308/idb_test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true&max_allowed_packet=10485760";
 	static final String constr = "jdbc:mysql://10.20.36.20:3306/dd";
-	static final String username = "idb";
-	static final String password = "idb";
+	static final String username = "dd";
+	static final String password = "dds";
 //	static final String constr = "jdbc:mysql://localhost:3306/test";
 //	static final String username = "test";
 //	static final String password = "test";

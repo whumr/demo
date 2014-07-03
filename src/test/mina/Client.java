@@ -1,10 +1,11 @@
 package test.mina;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Random;
 
 public class Client {
 
@@ -21,15 +22,17 @@ public class Client {
 		
 		new Thread(new Runnable() {
 			public void run() {
-				Random r = new Random();
+				BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+				String s = null;
 				while (true) {
 					try {
-						int op = 1 + r.nextInt(4);
-						int n1 = r.nextInt(100);
-						int n2 = 1 + r.nextInt(100);
-						out.write((op + " " + n1 + " " + n2).getBytes());
-						out.flush();
-						Thread.sleep(1000L);
+						s = r.readLine();
+						if (s != null && !"".equals(s.trim())) {
+							
+							out.write(s.getBytes());
+							out.flush();
+						}
+//						Thread.sleep(1000L);
 					} catch (Exception e) {
 						e.printStackTrace();
 						break;

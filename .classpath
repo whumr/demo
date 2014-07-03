@@ -33,7 +33,18 @@
 	<classpathentry kind="lib" path="lib/hazelcast-3.1.7.jar" sourcepath="D:/work2/新建文件夹/hazelcast-3.1.7-src/hazelcast/src/main/java"/>
 	<classpathentry kind="lib" path="lib/hazelcast-client-3.1.7.jar" sourcepath="D:/work2/新建文件夹/hazelcast-3.1.7-src/hazelcast-client/src/main/java"/>
 	<classpathentry kind="lib" path="lib/zookeeper-3.4.6.jar"/>
-	<classpathentry kind="lib" path="lib/mina-core-2.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/mina-core-2.0.7.jar" sourcepath="D:/work2/新建文件夹/mina/apache-mina-2.0.7-src/src/mina-core/src/main/java"/>
 	<classpathentry kind="lib" path="lib/netty-all-4.0.18.Final.jar"/>
+	<classpathentry kind="lib" path="lib/jmxtools.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-continuation-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-http-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-io-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-security-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-server-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-servlet-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-util-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-webapp-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-xml-7.6.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api-2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

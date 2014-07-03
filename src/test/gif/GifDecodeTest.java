@@ -13,12 +13,12 @@ import com.gif4j.GifImage;
 public class GifDecodeTest {
 
 	public static void main(String[] args) throws IOException {
-		GifImage gif = GifDecoder.decode(new File("test.gif"));
+		GifImage gif = GifDecoder.decode(new File("C:\\Users\\Administrator\\Desktop\\girl.gif"));
 		for (int i = 0; i < gif.getNumberOfFrames(); i++) {
 			GifFrame frame = gif.getFrame(i);
 			
 			BufferedImage img = frame.getAsBufferedImage();
-			ImageIO.write(img, "png", new File("test" + i + ".png"));
+			ImageIO.write(img, "jpg", new File("C:\\Users\\Administrator\\Desktop\\g\\girl" + i + ".jpg"));
 		}
 //		BufferedImage img = ImageIO.read(new File("test.gif"));
 //		System.out.println(img.getHeight());

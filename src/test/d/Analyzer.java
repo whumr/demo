@@ -25,42 +25,10 @@ import org.htmlparser.tags.TableTag;
 import org.htmlparser.util.NodeList;
 
 public class Analyzer {
-
 	public static void main(String[] args) throws Exception {
-//		args = "和田玉白玉资产经营2期5组---ZT201400055".split("---");
-//		for (int i = 0; i < args.length; i++) {
-//			System.out.println(args[i]);
-//		}
-//		String s = "http://www.352.com/trading3/webTradingRzbDetail.do?id=1182";
-//		System.out.println(s.substring(s.lastIndexOf("=") + 1));
-//		System.out.println(Spider.sdf.format(new Date(System.currentTimeMillis())));
-//		System.out.println(Integer.parseInt("122.00".split("\\.")[0]));
-//		s = "<span class=\"style1\">1000.00</span>";
-//		System.out.println(s.substring(s.indexOf(">") + 1, s.indexOf("<", 1)));
-//		s = "180 天";
-//		System.out.println(s.substring(0, s.indexOf("天")));
-
-
-		Spider.getData(19, 20);
-		
-//		for (int i = 1; i < 20; i += 2) {
-//			final int index = i;
-//			new Thread(new Runnable() {
-//				@Override
-//				public void run() {
-//					try {
-//						Spider.getData(index, index + 1);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}).start();
-//		}
-		
+		Spider.getData(9, 24);
 	}
-	
 }
-
 
 class Spider {
 	static HttpClient httpClient = HttpClientBuilder.create().build();
@@ -86,11 +54,15 @@ class Spider {
 		get.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36");
 		HttpResponse response = httpClient.execute(get);
 		Header[] locationHeader = response.getHeaders("location");
-		if (locationHeader != null && locationHeader.length > 0) {
-			System.out.println(locationHeader[0].getValue());
-			throw new Exception("xxx");
-		} else
-			return readResponse(response);
+		try {
+			if (locationHeader != null && locationHeader.length > 0) {
+				System.out.println(locationHeader[0].getValue());
+				throw new Exception("xxx");
+			} else 
+				return readResponse(response);
+		} finally {
+			get.releaseConnection();
+		}
 	}
 	
 	static String readResponse(HttpResponse response) throws Exception {

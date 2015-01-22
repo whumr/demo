@@ -12,139 +12,51 @@ import org.eclipse.jetty.continuation.ContinuationSupport;
 
 public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
-//	private MyAsyncHandler myAsyncHandler;  
-//	  
-//    public void init() throws ServletException {  
-//  
-//        myAsyncHandler = new MyAsyncHandler() {  
-//            public void register(final MyHandler myHandler) {  
-//                new Thread(new Runnable() {  
-//                    public void run() {  
-//                        try {  
-//                            Thread.sleep(10000);  
-//                            myHandler.onMyEvent("complete!");  
-//                        } catch (InterruptedException e) {  
-//                            // TODO Auto-generated catch block  
-//                            e.printStackTrace();  
-//                        }  
-//  
-//                    }  
-//                }).start();  
-//            }  
-//        };  
-//  
-//    }  
-//  
-//    public void doGet(HttpServletRequest request, HttpServletResponse response)  
-//            throws ServletException, IOException {  
-//        // if we need to get asynchronous results  
-//        //Object results = request.getAttribute("results");  
-//        final Continuation continuation = ContinuationSupport  
-//                .getContinuation(request);  
-//        //if (results == null) {  
-//        if (continuation.isInitial()) {  
-//              
-//            //request.setAttribute("results","null");  
-//            sendMyFirstResponse(response);  
-//            // suspend the request  
-//            continuation.suspend(); // always suspend before registration  
-//  
-//            // register with async service. The code here will depend on the  
-//            // the service used (see Jetty HttpClient for example)  
-//            myAsyncHandler.register(new MyHandler() {  
-//                public void onMyEvent(Object result) {  
-//                    continuation.setAttribute("results", result);  
-//                      
-//                    continuation.resume();  
-//                }  
-//            });  
-//            return; // or continuation.undispatch();  
-//        }  
-//  
-//        if (continuation.isExpired()) {  
-//            sendMyTimeoutResponse(response);  
-//            return;  
-//        }  
-//         //Send the results  
-//        Object results = request.getAttribute("results");  
-//        if(results==null){  
-//            response.getWriter().write("why reach here??");  
-//            continuation.resume();  
-//            return;  
-//        }  
-//        sendMyResultResponse(response, results);  
-//    }  
-//  
-//    private interface MyAsyncHandler {  
-//        public void register(MyHandler myHandler);  
-//    }  
-//  
-//    private interface MyHandler {  
-//        public void onMyEvent(Object result);  
-//    }  
-//      
-//    private void sendMyFirstResponse(HttpServletResponse response) throws IOException {  
-//        //必须加上这一行，否者flush也没用，为什么？  
-//        response.setContentType("text/html");  
-//        response.getWriter().write("start");  
-//        response.getWriter().flush();  
-//  
-//    }  
-//  
-//    private void sendMyResultResponse(HttpServletResponse response,  
-//            Object results) throws IOException {  
-//        //response.setContentType("text/html");  
-//        response.getWriter().write("results:" + results);  
-//        response.getWriter().flush();  
-//  
-//    }  
-//  
-//    private void sendMyTimeoutResponse(HttpServletResponse response)  
-//            throws IOException {  
-//        response.getWriter().write("timeout");  
-//  
-//    } 
-	
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(final HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doget....");
-		/**
-		 * Continuation异步处理request
-		 */
-		final Continuation continuation = ContinuationSupport.getContinuation(request);
-		if (continuation.isInitial()) { 
-			
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					continuation.resume();
-					System.out.println("resume...");
-				}
-			}).start();
-			continuation.suspend();
-			return;
-		}
-		
-		System.out.println("------------");
-		
-		response.setContentType("text/html");
-		response.getWriter().write("start");
-		response.getWriter().flush();
-	}
+		Object o = request.getAttribute("aaaa");
+		System.out.println("o=" + o);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		final Continuation continuation = ContinuationSupport.getContinuation(request);
+		
+		System.out.println("continuation.isInitial()\t" + continuation.isInitial());
+		System.out.println("continuation.isResumed()\t" + continuation.isResumed());
+		System.out.println("continuation.isSuspended()\t" + continuation.isSuspended());
+		System.out.println("continuation.isExpired()\t" + continuation.isExpired());
+		
+		
+		if (o == null) {
+			if(continuation.isInitial()) {
+				request.setAttribute("aaaa", 1111);
+				continuation.suspend();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+	//					continuation.setAttribute("aaaa", 1111);
+	//					if (continuation.isSuspended()) {
+							continuation.resume();
+							System.out.println("----------------resume----------");
+	//					}
+					}
+				}).start();
+				System.out.println("isInitial...\n");
+			}
+//			continuation.undispatch();
+		} else {
+			String s = "start" + System.currentTimeMillis();
+			response.setContentType("text/html");
+			response.getWriter().write(s);
+			response.getWriter().flush();
+			System.out.println(s);
+			System.out.println("isResumed...\n");
+		}
+
 	}
 }

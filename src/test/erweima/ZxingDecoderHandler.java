@@ -50,10 +50,10 @@ public class ZxingDecoderHandler {
      * @param args 
      */  
     public static void main(String[] args) {  
-        String imgPath = "zxing.png";  
+        String imgPath = "C:\\Users\\Administrator\\Desktop\\a.jpg";  
         ZxingDecoderHandler handler = new ZxingDecoderHandler();  
         String decodeContent = handler.decode(imgPath);  
-        System.out.println("½âÂëÄÚÈİÈçÏÂ£º");  
+        System.out.println("è§£ç å†…å®¹å¦‚ä¸‹ï¼š");  
         System.out.println(decodeContent);  
         System.out.println("Michael ,you have finished zxing decode.");  
   

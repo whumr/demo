@@ -15,7 +15,7 @@ public class JServer {
 		
 		SelectChannelConnector nioConnector = new SelectChannelConnector();
         nioConnector.setUseDirectBuffers(false);
-        nioConnector.setPort(80);
+        nioConnector.setPort(8080);
         s.addConnector(nioConnector);
         
         

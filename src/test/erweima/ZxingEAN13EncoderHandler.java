@@ -14,7 +14,7 @@ import com.google.zxing.common.BitMatrix;
 public class ZxingEAN13EncoderHandler {  
   
     /** 
-     * ±àÂë 
+     * ç¼–ç  
      * @param contents 
      * @param width 
      * @param height 
@@ -44,7 +44,7 @@ public class ZxingEAN13EncoderHandler {
      */  
     public static void main(String[] args) {  
         String imgPath = "zxing_EAN13.png";  
-        // Òæ´ïÎŞÌÇ¿ÚÏãÌÇµÄÌõĞÎÂë  
+        // ç›Šè¾¾æ— ç³–å£é¦™ç³–çš„æ¡å½¢ç   
         String contents = "6923450657713";  
   
         int width = 105, height = 50;  

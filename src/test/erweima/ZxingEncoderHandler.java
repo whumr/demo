@@ -17,7 +17,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 public class ZxingEncoderHandler {
 
 	/**
-	 * 编码
+	 * 缂栫爜
 	 * 
 	 * @param contents
 	 * @param width
@@ -26,9 +26,9 @@ public class ZxingEncoderHandler {
 	 */
 	public void encode(String contents, int width, int height, String imgPath) {
 		Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
-		// 指定纠错等级
+		// 鎸囧畾绾犻敊绛夌骇
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-		// 指定编码格式
+		// 鎸囧畾缂栫爜鏍煎紡
 		hints.put(EncodeHintType.CHARACTER_SET, "GBK");
 		try {
 			BitMatrix bitMatrix = new MultiFormatWriter().encode(contents,
@@ -47,8 +47,8 @@ public class ZxingEncoderHandler {
 	 */
 	public static void main(String[] args) {
 		String imgPath = "zxing.png";
-		String contents = "Hello Michael(大大),welcome to Zxing!"
-				+ "\nMichael’s blog [ http://sjsky.iteye.com ]"
+		String contents = "Hello Michael(澶уぇ),welcome to Zxing!"
+				+ "\nMichael鈥檚 blog [ http://sjsky.iteye.com ]"
 				+ "\nEMail [ sjsky007@gmail.com ]" + "\nTwitter [ @suncto ]";
 		int width = 300, height = 300;
 		ZxingEncoderHandler handler = new ZxingEncoderHandler();

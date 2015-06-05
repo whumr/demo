@@ -48,7 +48,7 @@ public class ZxingEAN13DecoderHandler {
         String imgPath = "zxing_EAN13.png";  
         ZxingEAN13DecoderHandler handler = new ZxingEAN13DecoderHandler();  
         String decodeContent = handler.decode(imgPath);  
-        System.out.println("½âÂëÄÚÈİÈçÏÂ£º");  
+        System.out.println("è§£ç å†…å®¹å¦‚ä¸‹ï¼š");  
         System.out.println(decodeContent);  
         System.out.println("Michael ,you have finished zxing EAN-13 decode.");  
   
